@@ -398,4 +398,44 @@
 						$main._show(location.hash.substr(1), true);
 					});
 
+// Toggle citation dropdown
+function toggleCitation(button) {
+    const dropdown = $(button).closest('li').find('.citation-dropdown');
+    
+    if (dropdown.length) {
+        const isActive = dropdown.hasClass('active');
+        
+        // Close all other dropdowns
+        $('.citation-dropdown').removeClass('active');
+        
+        // Toggle current dropdown if it wasn't active
+        if (!isActive) {
+            dropdown.addClass('active');
+        }
+    }
+}
+
+// Close dropdowns when clicking elsewhere
+$(document).on('click', function(event) {
+    if (!$(event.target).closest('.cite-button').length && 
+        !$(event.target).closest('.citation-dropdown').length) {
+        $('.citation-dropdown').removeClass('active');
+    }
+});
+
+// Connect toggle function to cite buttons
+$(document).on('click', '.cite-button', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleCitation(this);
+});
+
+// Initialize any citation buttons present on page load
+$(function() {
+    $('.cite-button').on('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleCitation(this);
+    });
+});
 })(jQuery);
