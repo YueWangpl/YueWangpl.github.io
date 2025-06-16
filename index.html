@@ -19,47 +19,45 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="fa-solid fa-cat"></span>
-						</div>
-						<div class="content">
-							
-<div class="inner" style="display: flex; flex-direction: row; align-items: center; gap: 2rem; flex-wrap: wrap;">
-    <div style="flex: 1; min-width: 250px;">
-        <h1>Yue Wang</h1>
-        <p>Ph.D. Candidate @ Stony Brook University<br>
-        Geometry Processing | 3D Vision | Deep Learning</p>
-        <p>I am a CS Ph.D. candidate under the supervision of Dr. Xianfeng Gu at Stony Brook University. My research interests include generative models on vision and graphics.</p>
-		<!-- <div style="margin-top: 1rem;">
-			<p><strong>Email:</strong> <a href="mailto:yue.wang.8@stonybrook.edu">yue.wang.8@stonybrook.edu</a></p>
-			<p><strong>Google Scholar:</strong> <a href="https://scholar.google.com" target="_blank">scholar.google.com</a></p>
-		</div> -->
-
+<header id="header">
+		
+    <!-- Navigation tabs at top -->
+    <nav>
+        <ul>
+            <li><a href="#intro">About</a></li>
+            <li><a href="#publication">Publication</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <div class="inner" style="display: flex; flex-direction: row; align-items: center; gap: 2rem; flex-wrap: wrap;">
+            <!-- Text container - takes 75% of width (3 parts) -->
+            <div style="flex: 3; min-width: 250px;">
+                <h1>Yue Wang</h1>
+                <p>Ph.D. Candidate @ Stony Brook University<br>
+                Geometry Processing | 3D Vision | Deep Learning</p>
+                <p>I am a CS Ph.D. candidate under the supervision of Dr. Xianfeng Gu at Stony Brook University. My research interests include generative models on vision and graphics.</p>
+            </div>
+            
+            <!-- Image container - takes 25% of width (1 part) -->
+            <div style="flex: 1; min-width: 200px; text-align: center;">
+                <img id="random-image" alt="Profile" style="max-width: 100%; border-radius: 1rem;" />
+                <script>
+                const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
+                const randomIndex = Math.floor(Math.random() * images.length);
+                const chosen = images[randomIndex];
+                document.getElementById('random-image').src = 'pics/' + chosen;
+                </script>
+            </div>
+        </div>
     </div>
-    <div style="flex: 0 0 200px; text-align: center;">
-        <!-- <img src="images/pic01.jpg" alt="Profile" style="max-width: 100%; border-radius: 50%;"/> -->
-		<img id="random-image" alt="Profile" style="max-width: 100%; border-radius: 1rem;" />
-		<script>
-		const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg']; // add all image filenames here
-		const randomIndex = Math.floor(Math.random() * images.length);
-		const chosen = images[randomIndex];
-		document.getElementById('random-image').src = 'pics/' + chosen;
-		</script>
+    
+    <!-- Cat logo moved to bottom -->
+    <div class="logo" style="order: 3;">
+        <span class="fa-solid fa-cat"></span>
     </div>
-</div>
-
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">About</a></li>
-								<li><a href="#publication">Publication</a></li>
-								<li><a href="#teaching">Teaching</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+</header>
 
 				<!-- Main -->
 					<div id="main">
@@ -105,14 +103,14 @@
             </div>
             <div class="citation-dropdown">
                 <pre>@inbook{doi:10.1137/1.9781611978575.5,
-author = {Yuyang Cao and Yue Wang and Yiming Zhu and Hang Si and Na Lei and Zhongxuan Luo and Xianfeng Gu},
-title = {Quad Mesh Density Control using Optimal Transport},
-booktitle = {Proceedings of the 2025 SIAM International Meshing Roundtable (IMR)},
-chapter = {},
-pages = {45-57},
-doi = {10.1137/1.9781611978575.5},
-URL = {https://epubs.siam.org/doi/abs/10.1137/1.9781611978575.5},
-eprint = {https://epubs.siam.org/doi/pdf/10.1137/1.9781611978575.5}}
+	author = {Yuyang Cao and Yue Wang and Yiming Zhu and Hang Si and Na Lei and Zhongxuan Luo and Xianfeng Gu},
+	title = {Quad Mesh Density Control using Optimal Transport},
+	booktitle = {Proceedings of the 2025 SIAM International Meshing Roundtable (IMR)},
+	chapter = {},
+	pages = {45-57},
+	doi = {10.1137/1.9781611978575.5},
+	URL = {https://epubs.siam.org/doi/abs/10.1137/1.9781611978575.5},
+	eprint = {https://epubs.siam.org/doi/pdf/10.1137/1.9781611978575.5}}
 </pre>
             </div>
         </li>
@@ -124,61 +122,61 @@ eprint = {https://epubs.siam.org/doi/pdf/10.1137/1.9781611978575.5}}
             <a href="https://ieeexplore.ieee.org/document/10937398" class="button small" target="_blank">Link</a>
             <button class="button small cite-button" onclick="showCitation('cite2')">Cite</button>
         </div>
-        <div id="cite2" class="citation-popup" style="display:none;">
+            <div class="citation-dropdown">
             <pre>@INPROCEEDINGS{10937398,
-  author={Boorboor, Saeed and Gutiérrez-Rosales, Doris and Shoaib, Ahamed and Kalsi, Chahat and Wang, Yue and Cao, Yuyang and Gu, Xianfeng and Kaufman, Arie E.},
-  booktitle={2025 IEEE Conference Virtual Reality and 3D User Interfaces (VR)}, 
-  title={Silo: Half-Gigapixel Cylindrical Stereoscopic Immersive Display}, 
-  year={2025},
-  volume={},
-  number={},
-  pages={483-493},
-  keywords={Visualization;Three-dimensional displays;Stereo image processing;Data visualization;Transportation;Virtual reality;Software systems;Liquid crystal displays;Floors;Next generation networking;Immersive Visualization;Ultra-high-resolution Display;Data Visualization;CAVE;Conformal Visualization},
-  doi={10.1109/VR59515.2025.00072}}
+	author={Boorboor, Saeed and Gutiérrez-Rosales, Doris and Shoaib, Ahamed and Kalsi, Chahat and Wang, Yue and Cao, Yuyang and Gu, Xianfeng and Kaufman, Arie E.},
+	booktitle={2025 IEEE Conference Virtual Reality and 3D User Interfaces (VR)}, 
+	title={Silo: Half-Gigapixel Cylindrical Stereoscopic Immersive Display}, 
+	year={2025},
+	volume={},
+	number={},
+	pages={483-493},
+	keywords={Visualization;Three-dimensional displays;Stereo image processing;Data visualization;Transportation;Virtual reality;Software systems;Liquid crystal displays;Floors;Next generation networking;Immersive Visualization;Ultra-high-resolution Display;Data Visualization;CAVE;Conformal Visualization},
+	doi={10.1109/VR59515.2025.00072}}
 </pre>
-            <button class="button small" onclick="hideCitation('cite2')">Close</button>
         </div>
     </li>
     
         <li>
             <strong>Robust Surface Remeshing Based on Conformal Welding</strong> @SIAM IMR 2024
-        <p class="authors"> Wei Chen, Siquan Sun, Yue Wang, Na Lei, Chander Sadasivan, Apostolos Tassiopoulos, Shikui Chen, Hang Si, and Xianfeng Gu</p>
-        <div class="publication-links">
-            <a href="https://epubs.siam.org/doi/10.1137/1.9781611978001.3" class="button small" target="_blank">Link</a>
-            <button class="button small cite-button" onclick="showCitation('cite3')">Cite</button>
-        </div>
-        <div id="cite3" class="citation-popup" style="display:none;">
-            <pre>@inbook{doi:10.1137/1.9781611978001.3,
-			author = {Wei Chen and Siquan Sun and Yue Wang and Na Lei and Chander Sadasivan and Apostolos Tassiopoulos and Shikui Chen and Hang Si and Xianfeng Gu},
-			title = {Robust Surface Remeshing Based on Conformal Welding},
-			booktitle = {Proceedings of the 2024 International Meshing Roundtable (IMR)},
-			chapter = {},
-			pages = {0-0},
-			doi = {10.1137/1.9781611978001.3},
-			URL = {https://epubs.siam.org/doi/abs/10.1137/1.9781611978001.3},
-			eprint = {https://epubs.siam.org/doi/pdf/10.1137/1.9781611978001.3}
-			}
-			</pre>
-            <button class="button small" onclick="hideCitation('cite3')">Close</button>
-        </div>
-    </li>
-    
-    <li>
+        	<p class="authors"> Wei Chen, Siquan Sun, Yue Wang, Na Lei, Chander Sadasivan, Apostolos Tassiopoulos, Shikui Chen, Hang Si, and Xianfeng Gu</p>
+			<div class="publication-links">
+				<a href="https://epubs.siam.org/doi/10.1137/1.9781611978001.3" class="button small" target="_blank">Link</a>
+				<button class="button small cite-button" onclick="showCitation('cite3')">Cite</button>
+			</div>
+				<div class="citation-dropdown">
+				<pre>@inbook{doi:10.1137/1.9781611978001.3,
+				author = {Wei Chen and Siquan Sun and Yue Wang and Na Lei and Chander Sadasivan and Apostolos Tassiopoulos and Shikui Chen and Hang Si and Xianfeng Gu},
+				title = {Robust Surface Remeshing Based on Conformal Welding},
+				booktitle = {Proceedings of the 2024 International Meshing Roundtable (IMR)},
+				chapter = {},
+				pages = {0-0},
+				doi = {10.1137/1.9781611978001.3},
+				URL = {https://epubs.siam.org/doi/abs/10.1137/1.9781611978001.3},
+				eprint = {https://epubs.siam.org/doi/pdf/10.1137/1.9781611978001.3}
+				}
+				</pre>
+			</div>
+		</li>
+		
+		<li>
             <strong>Removing the Quality Tax in Controllable Face Generation</strong> @WACV 2024 & CVPR 2023 AI4CC Workshop
         <p class="authors">Yue Wang, Emma Wilson, Xianfeng Gu</p>
         <div class="publication-links">
             <a href="https://visual.cs.brown.edu/projects/taxfreegan-webpage/" class="button small" target="_blank">Link</a>
             <button class="button small cite-button" onclick="showCitation('cite4')">Cite</button>
         </div>
-        <div id="cite4" class="citation-popup" style="display:none;">
+            <div class="citation-dropdown">
             <pre>@inproceedings{wang2024removing,
-  title={Removing the Quality Tax in Controllable Face Generation},
-  author={Wang, Yue and Wilson, Emma and Gu, Xianfeng},
-  booktitle={Winter Conference on Applications of Computer Vision},
-  year={2024}
-}</pre>
-            <button class="button small" onclick="hideCitation('cite4')">Close</button>
-        </div>
+			title={Removing the Quality Tax in Controllable Face Generation},
+			author={Wang, Yue and Wilson, Emma and Gu, Xianfeng},
+			booktitle={Winter Conference on Applications of Computer Vision},
+			year={2024}
+			}
+			</pre>
+        	</div>
+	
+    	</li>
     </ul>
 </article>
 
