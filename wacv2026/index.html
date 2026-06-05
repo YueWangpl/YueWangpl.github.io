@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Domain Agnostic 3D Face Embeddings - WACV 2026</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Learning Domain Agnostic Latent Embeddings of 3D Faces for Zero-shot Animal Expression Transfer - WACV 2026 LENS Workshop" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Source Sans Pro', Helvetica, sans-serif;
+            color: #3a3a3a;
+            background: #f5f5f5;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: #5a7bbf; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .hero {
+            background: #2a2f3a;
+            color: #fff;
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+        }
+        .hero-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .hero-logos img { height: 50px; width: auto; }
+        .hero h1 {
+            font-size: 1.6rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            line-height: 1.4;
+        }
+        .hero .authors {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 0.4rem;
+        }
+        .hero .authors sup { font-size: 0.7em; }
+        .hero .affil {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.5rem;
+        }
+        .hero .venue-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            padding: 0.4em 1em;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+        }
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5em;
+            padding: 0.6em 1.5em;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .btn:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+        .btn-primary { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
+
+        .back-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .back-link:hover { color: #5a7bbf; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        section:last-of-type { border-bottom: none; }
+        section h2 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #3a3a3a;
+            margin-bottom: 1.2rem;
+        }
+        section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.6rem;
+            margin-top: 1.5rem;
+        }
+        section p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 0.8rem;
+        }
+
+        .abstract-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+        .abstract-box p { margin: 0; }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1.2rem;
+        }
+        .card h3 { margin-top: 0; }
+        .card ul { list-style: disc; padding-left: 1.2rem; }
+        .card ul li { font-size: 0.9rem; color: #555; margin-bottom: 0.3rem; }
+
+        .fig {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .fig img { width: 100%; }
+        .fig-cap {
+            padding: 0.6rem 1rem;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        .fig-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .fig-row .fig { margin-top: 0; }
+
+        .callout-warn {
+            background: #fef3ed;
+            border-left: 3px solid #d85a30;
+            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            color: #713b1f;
+            margin-top: 1rem;
+        }
+
+        .cite-block {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.78rem;
+            color: #555;
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin-top: 0.8rem;
+        }
+
+        .key-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        /* Failure section with side-by-side text + images */
+        .failure-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 1rem;
+            align-items: start;
+        }
+        .failure-layout .callout-warn { margin-top: 0; }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.2rem; }
+            .grid2, .fig-row, .key-grid, .failure-layout { grid-template-columns: 1fr; }
+            .hero-logos img { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Yue Wang's homepage</a>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-logos">
+        <img src="images/logo_sbu.png" alt="Stony Brook University" />
+        <img src="images/logo_futurewei.png" alt="FutureWei Technologies" />
+        <img src="images/logo_wacv.png" alt="WACV 2026" />
+    </div>
+    <div class="venue-badge">WACV 2026 LENS Workshop &middot; Tucson, Arizona &middot; Mar 6&ndash;10, 2026</div>
+    <h1>Learning Domain Agnostic Latent Embeddings of 3D Faces for Zero-shot Animal Expression Transfer</h1>
+    <div class="authors">
+        Yue Wang<sup>1</sup>, Lawrence Amadi<sup>2</sup>, Xiang Gao<sup>1</sup>, Yazheng Chen<sup>1</sup>, Yuanpeng Liu<sup>1</sup>, Ning Lu<sup>2</sup>, and Xianfeng David Gu<sup>1</sup>
+    </div>
+    <div class="affil"><sup>1</sup>Stony Brook University &nbsp;&middot;&nbsp; <sup>2</sup>FutureWei Technologies</div>
+    <div class="btn-row">
+        <a class="btn btn-primary" href="https://openaccess.thecvf.com/content/WACV2026W/LENS-2026/papers/Wang_Learning_Domain_Agnostic_Latent_Embeddings_of_3D_Faces_for_Zero-shot_WACVW_2026_paper.pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> Paper (PDF)
+        </a>
+        <a class="btn" href="https://arxiv.org/abs/2601.06484" target="_blank">
+            <i class="fas fa-book"></i> arXiv
+        </a>
+        <a class="btn" href="#results">
+            <i class="fas fa-images"></i> Results
+        </a>
+        <a class="btn" href="#cite">
+            <i class="fas fa-quote-left"></i> Cite
+        </a>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Abstract -->
+    <section>
+        <h2>Abstract</h2>
+        <div class="abstract-box">
+            <p>We propose a framework for zero-shot cross-species expression transfer on 3D face meshes. By learning domain-agnostic latent embeddings that disentangle identity and expression using intrinsic geometric descriptors (HKS and WKS), the model generalizes at inference time to animal meshes &mdash; including felines, dogs, and hippos &mdash; without any animal supervision during training. The approach is invariant to global translation, rotation, and scale, eliminating the need for pre-alignment or canonical template normalization.</p>
+        </div>
+    </section>
+
+    <!-- Results — dog & hippo first for visual impact -->
+    <section id="results">
+        <h2>Results</h2>
+        <p>The model trained solely on human face data successfully transfers diverse expressions to unseen animal meshes at inference time &mdash; zero-shot, with no animal supervision.</p>
+
+        <h3>Zero-shot dog and hippo expression transfer</h3>
+        <div class="fig-row">
+            <div class="fig">
+                <img src="images/dog_smile.png" alt="Dog smile transfer" />
+                <div class="fig-cap">sliceddog &rarr; smile</div>
+            </div>
+            <div class="fig">
+                <img src="images/dog_lipup.png" alt="Dog lip-up-eye-squint transfer" />
+                <div class="fig-cap">sliceddog &rarr; 1lipup1eyesquint</div>
+            </div>
+        </div>
+        <div class="fig-row">
+            <div class="fig">
+                <img src="images/hippo_mouthslant.png" alt="Hippo mouthslant transfer" />
+                <div class="fig-cap">slicedhippo &rarr; mouthslant1eyesquint</div>
+            </div>
+            <div class="fig">
+                <img src="images/hippo_mouthside.png" alt="Hippo mouthsideway transfer" />
+                <div class="fig-cap">slicedhippo &rarr; mouthsideway</div>
+            </div>
+        </div>
+
+        <h3>Cross-species expression transfer grid</h3>
+        <div class="fig">
+            <img src="images/human&catfaces.png" alt="Human and feline expression transfer grid" />
+            <div class="fig-cap">Top row: 5 different identities including humans and felines. Left column: 4 human expression inputs. Grid: predicted expression for each identity&ndash;expression pair.</div>
+        </div>
+
+        <h3>Failure cases</h3>
+        <div class="failure-layout">
+            <div class="callout-warn">
+                <strong>Limitation:</strong> Some expressions, such as eye or mouth closing, are challenging to transfer to animal faces due to large morphological differences between human and animal facial anatomy in those regions. The model struggles most when the target species lacks the anatomical structures needed to reproduce a given expression.
+            </div>
+            <div class="fig" style="margin-top:0;">
+                <img src="images/failure_cases.png" alt="Failure cases in expression transfer" />
+                <div class="fig-cap">Examples where expression transfer fails to capture the intended expression</div>
+            </div>
+        </div>
+
+        <p style="margin-top:1.2rem; font-size:0.85rem; color:#888;">
+            <i class="fas fa-arrow-down" style="margin-right:0.3em;"></i>
+            See also: <a href="#method">Method</a> and <a href="#latent">Latent space analysis</a> below for more details on how these results are achieved.
+        </p>
+    </section>
+
+    <!-- Motivation -->
+    <section>
+        <h2>Motivation</h2>
+        <div class="grid2">
+            <div class="card">
+                <h3>Cross-species gap</h3>
+                <ul>
+                    <li>Human facial animation is well-developed, but extending it to non-human characters remains challenging due to morphological differences</li>
+                    <li>Collecting paired animal expression data is costly or infeasible for many species</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Limitations of prior work</h3>
+                <ul>
+                    <li>Typical human expression transfer methods rely on shared topology or extensive labels</li>
+                    <li>They don't generalize to animals out of the box</li>
+                    <li>Our method requires zero animal supervision at training time</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method -->
+    <section id="method">
+        <h2>Method</h2>
+        <p>The framework has a single training stage on human face data, after which the learned model is directly applied to animal meshes at inference time without any additional training or fine-tuning.</p>
+
+        <h3>Training: Learning domain-agnostic latent embeddings</h3>
+        <div class="fig">
+            <img src="images/stage1.png" alt="Training: Learning Domain Agnostic Latent Embedding of 3D Faces" />
+            <div class="fig-cap">The model is trained on human face triplets. Identity and expression encoders produce disentangled latents z<sub>ID</sub> and z<sub>Exp</sub>, fused via cross-attention into a geometry decoder supervised by Jacobian and vertex losses.</div>
+        </div>
+
+        <h3>Inference: Zero-shot human-to-animal expression transfer</h3>
+        <div class="fig">
+            <img src="images/stage2.png" alt="Inference: Human-To-Animal Expression Transfer" />
+            <div class="fig-cap">At inference time, the trained model is directly applied to unseen animal identity meshes. No additional training, fine-tuning, or animal data is used &mdash; this is purely zero-shot evaluation.</div>
+        </div>
+
+        <h3>Key components</h3>
+        <div class="key-grid">
+            <div class="card">
+                <h3>Geometry</h3>
+                <ul>
+                    <li>Intrinsic descriptors: HKS and WKS</li>
+                    <li>Invariant to rigid transformations</li>
+                    <li>Neural Jacobian Field decoder</li>
+                    <li>Poisson solver for mesh reconstruction</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Learning</h3>
+                <ul>
+                    <li>DiffusionNet encoder for each branch</li>
+                    <li>Cross-attention latent fusion</li>
+                    <li>Mesh-agnostic inputs</li>
+                    <li>Vertex loss + Jacobian loss</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dataset -->
+    <section>
+        <h2>Dataset</h2>
+        <div class="grid2">
+            <div class="card">
+                <h3><i class="fas fa-user" style="margin-right:0.4em;color:#888;"></i>Training &mdash; human faces</h3>
+                <ul>
+                    <li>1,000 synthesized mesh triplets (M<sub>id</sub>, M<sub>exp</sub>, M<sub>gt</sub>) from the ICT Face Model</li>
+                    <li>Identity mesh may have a non-neutral expression</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-paw" style="margin-right:0.4em;color:#888;"></i>Inference &mdash; animal meshes</h3>
+                <ul>
+                    <li>Felines from CAFM (WACV Workshops 2020)</li>
+                    <li>Dogs and hippos from SMAL (CVPR 2017)</li>
+                    <li>Zero animal supervision used at any point</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latent Space -->
+    <section id="latent">
+        <h2>Latent Space Analysis</h2>
+        <p>t-SNE visualization shows the ID encoder produces well-separated clusters per identity, while the expression encoder captures meaningful structure across 50 expression categories.</p>
+        <div class="fig-row">
+            <div class="fig">
+                <img src="images/tsne_id.png" alt="Latent Space of ID Encoder (t-SNE)" />
+                <div class="fig-cap">ID encoder latent space &mdash; each color is a different identity</div>
+            </div>
+            <div class="fig">
+                <img src="images/tsne_exp.png" alt="Expression Latent Space (t-SNE)" />
+                <div class="fig-cap">Expression encoder latent space &mdash; each color is a different expression</div>
+            </div>
+        </div>
+
+        <h3>Closest neighbors in latent space</h3>
+        <div class="fig-row">
+            <div class="fig">
+                <img src="images/nearest_id.png" alt="Closest 3 faces in ID latent space" />
+                <div class="fig-cap">Closest 3 faces in the ID latent space</div>
+            </div>
+            <div class="fig">
+                <img src="images/nearest_exp.png" alt="Closest 3 faces in expression latent space" />
+                <div class="fig-cap">Closest 3 faces in the expression latent space</div>
+            </div>
+        </div>
+
+        <h3>Furthest neighbors in latent space</h3>
+        <div class="fig-row">
+            <div class="fig">
+                <img src="images/furthest_id.png" alt="Furthest 3 faces in ID latent space" />
+                <div class="fig-cap">Furthest 3 faces in the ID latent space</div>
+            </div>
+            <div class="fig">
+                <img src="images/furthest_exp.png" alt="Furthest 3 faces in expression latent space" />
+                <div class="fig-cap">Furthest 3 faces in the expression latent space</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Work -->
+    <section>
+        <h2>Future Directions</h2>
+        <div class="grid2">
+            <div class="card">
+                <h3>Richer training data</h3>
+                <p>Train on larger, more diverse datasets (e.g., MultiFace) for better generalization across identities and expressions.</p>
+            </div>
+            <div class="card">
+                <h3>Richer supervision</h3>
+                <p>Add semantic or muscle-based supervision to improve realism and anatomical plausibility.</p>
+            </div>
+            <div class="card">
+                <h3>Dynamic sequences</h3>
+                <p>Extend to temporal sequences and real-time applications in VR, AR, and animation pipelines.</p>
+            </div>
+            <div class="card">
+                <h3>More species</h3>
+                <p>Expand zero-shot transfer to a wider variety of animal species with larger morphological differences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="cite">
+        <h2>Citation</h2>
+        <p>If you find this work useful, please cite:</p>
+        <div class="cite-block">@inproceedings{wang2026domain,
+  title     = {Learning Domain Agnostic Latent Embeddings of 3D Faces
+               for Zero-shot Animal Expression Transfer},
+  author    = {Wang, Yue and Amadi, Lawrence and Gao, Xiang and
+               Chen, Yazheng and Liu, Yuanpeng and Lu, Ning and
+               Gu, Xianfeng David},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on
+               Applications of Computer Vision (WACV) Workshops},
+  year      = {2026}
+}</div>
+    </section>
+
+</div>
+
+<footer>
+    &copy; 2026 Yue Wang &middot; Stony Brook University
+</footer>
+
+</body>
+</html>
